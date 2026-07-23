@@ -157,7 +157,40 @@ https://imt-earn.com/ref123
 </table>
 
 </div>
+<div id="withdrawBox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);">
 
+<div style="background:#fff;width:90%;max-width:350px;margin:80px auto;padding:20px;border-radius:10px;">
+
+<h3>Withdraw Request</h3>
+
+<input type="text" placeholder="Enter Amount" style="width:100%;padding:10px;margin:8px 0;">
+
+<input type="text" placeholder="JazzCash / Easypaisa Number" style="width:100%;padding:10px;margin:8px 0;">
+
+<button onclick="submitWithdraw()">Submit</button>
+
+<button onclick="closeWithdraw()">Close</button>
+
+</div>
+
+</div>
+
+<script>
+
+function showWithdraw(){
+document.getElementById("withdrawBox").style.display="block";
+}
+
+function closeWithdraw(){
+document.getElementById("withdrawBox").style.display="none";
+}
+
+function submitWithdraw(){
+alert("Withdraw Request Submitted");
+closeWithdraw();
+}
+
+</script>
 
 
 </body>
