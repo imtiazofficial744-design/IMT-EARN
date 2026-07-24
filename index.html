@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IMT EARN</title>
+<title>IMT EARN Dashboard</title>
 
 <style>
 *{
@@ -55,8 +55,8 @@ font-size:18px;
 cursor:pointer;
 }
 
-button:hover{
-background:#0b5ed7;
+.logout{
+background:#dc3545;
 }
 
 footer{
@@ -78,23 +78,19 @@ IMT EARN
 
 <div class="card">
 <h2>Welcome</h2>
-<p>Welcome to IMT EARN Platform.</p>
+<p id="userName">Loading...</p>
 </div>
 
 <div class="card">
 <h2>Dashboard</h2>
 
-<button onclick="alert('Deposit Page Coming Soon')">
-Deposit
-</button>
+<button>Deposit</button>
 
-<button onclick="alert('Withdraw Page Coming Soon')">
-Withdraw
-</button>
+<button>Withdraw</button>
 
-<button onclick="alert('Admin Panel Coming Soon')">
-Admin Panel
-</button>
+<button>Admin Panel</button>
+
+<button class="logout" id="logoutBtn">Logout</button>
 
 </div>
 
@@ -103,6 +99,41 @@ Admin Panel
 <footer>
 © 2026 IMT EARN
 </footer>
+
+<script type="module">
+
+import { auth } from "./firebase.js";
+import {
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+const userName=document.getElementById("userName");
+const logoutBtn=document.getElementById("logoutBtn");
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+userName.innerText="Welcome, "+(user.displayName || user.email);
+
+}else{
+
+window.location.href="login.html";
+
+}
+
+});
+
+logoutBtn.addEventListener("click",async()=>{
+
+await signOut(auth);
+
+window.location.href="login.html";
+
+});
+
+</script>
 
 </body>
 </html>
