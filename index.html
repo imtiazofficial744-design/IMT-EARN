@@ -79,16 +79,17 @@ IMT EARN
 <div class="card">
 <h2>Welcome</h2>
 <p id="userName">Loading...</p>
+<p id="userEmail"></p>
 </div>
 
 <div class="card">
 <h2>Dashboard</h2>
 
-<button>Deposit</button>
+<button id="depositBtn">Deposit</button>
 
-<button>Withdraw</button>
+<button id="withdrawBtn">Withdraw</button>
 
-<button>Admin Panel</button>
+<button id="adminBtn">Admin Panel</button>
 
 <button class="logout" id="logoutBtn">Logout</button>
 
@@ -102,20 +103,45 @@ IMT EARN
 
 <script type="module">
 
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
+
 import {
 onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+import {
+doc,
+getDoc,
+setDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 const userName=document.getElementById("userName");
+const userEmail=document.getElementById("userEmail");
 const logoutBtn=document.getElementById("logoutBtn");
 
-onAuthStateChanged(auth,(user)=>{
+onAuthStateChanged(auth,async(user)=>{
 
 if(user){
 
-userName.innerText="Welcome, "+(user.displayName || user.email);
+userName.innerText="Welcome, "+(user.displayName || "User");
+userEmail.innerText=user.email;
+
+const userRef=doc(db,"users",user.uid);
+
+const snap=await getDoc(userRef);
+
+if(!snap.exists()){
+
+await setDoc(userRef,{
+name:user.displayName || "",
+email:user.email,
+balance:0,
+createdAt:serverTimestamp()
+});
+
+}
 
 }else{
 
@@ -124,6 +150,18 @@ window.location.href="login.html";
 }
 
 });
+
+document.getElementById("depositBtn").onclick=()=>{
+alert("Deposit Page Coming Soon");
+};
+
+document.getElementById("withdrawBtn").onclick=()=>{
+alert("Withdraw Page Coming Soon");
+};
+
+document.getElementById("adminBtn").onclick=()=>{
+window.location.href="admin.html";
+};
 
 logoutBtn.addEventListener("click",async()=>{
 
