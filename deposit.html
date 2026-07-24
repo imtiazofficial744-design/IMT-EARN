@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMT EARN - Deposit</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f5f5;
+}
+
+header{
+background:#0d6efd;
+color:white;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:500px;
+margin:25px auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+margin-bottom:20px;
+}
+
+h2{
+text-align:center;
+color:#0d6efd;
+margin-bottom:15px;
+}
+
+.info{
+background:#eef5ff;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.info p{
+margin:8px 0;
+font-size:16px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#0d6efd;
+color:white;
+font-size:17px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0b5ed7;
+}
+
+.copyBtn{
+background:#198754;
+}
+
+.copyBtn:hover{
+background:#157347;
+}
+
+.backBtn{
+background:#6c757d;
+}
+
+.backBtn:hover{
+background:#5c636a;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+IMT EARN Deposit
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Deposit Details</h2>
+
+<div class="info">
+
+<p><b>Payment Method:</b> JazzCash</p>
+
+<p><b>Account Number:</b></p>
+
+<input
+type="text"
+id="accountNumber"
+value="03038369744"
+readonly>
+
+<button
+class="copyBtn"
+id="copyBtn">
+Copy Number
+</button>
+
+<p style="margin-top:15px;">
+<b>Account Name:</b>
+Ullah Rakhi
+</p>
+
+</div>
+
+<h2>Submit Deposit</h2>
+
+<input
+type="number"
+id="amount"
+placeholder="Enter Deposit Amount">
+
+<input
+type="text"
+id="trxid"
+placeholder="Enter Transaction ID">
+
+<input
+type="file"
+id="screenshot"
+accept="image/*">
+
+<button id="submitDeposit">
+Submit Deposit
+</button>
+
+<button
+class="backBtn"
+onclick="window.location.href='index.html'">
+Back Dashboard
+</button>
+
+</div>
+
+</div>
+<script type="module">
+
+import { auth, db } from "./firebase.js";
+
+import {
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+collection,
+addDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const copyBtn = document.getElementById("copyBtn");
+const submitDeposit = document.getElementById("submitDeposit");
+
+copyBtn.addEventListener("click",()=>{
+
+navigator.clipboard.writeText("03038369744");
+
+alert("JazzCash Number Copied");
+
+});
+
+let currentUser=null;
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+currentUser=user;
+
+}else{
+
+window.location.href="login.html";
+
+}
+
+});
+
+submitDeposit.addEventListener("click",async()=>{
+
+const amount=document.getElementById("amount").value.trim();
+const trxid=document.getElementById("trxid").value.trim();
+
+if(amount==="" || trxid===""){
+
+alert("Please fill all fields");
+
+return;
+
+}
+
+try{
+
+await addDoc(collection(db,"deposits"),{
+
+uid:currentUser.uid,
+name:currentUser.displayName || "",
+email:currentUser.email,
+
+amount:Number(amount),
+
+trxid:trxid,
+
+status:"Pending",
+
+paymentMethod:"JazzCash",
+
+accountNumber:"03038369744",
+
+createdAt:serverTimestamp()
+
+});
+
+alert("Deposit Request Submitted Successfully!");
+
+document.getElementById("amount").value="";
+document.getElementById("trxid").value="";
+document.getElementById("screenshot").value="";
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
