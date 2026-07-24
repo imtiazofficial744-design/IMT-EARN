@@ -1,8 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMT EARN - Register</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#fff;
+padding:30px;
+border-radius:15px;
+width:340px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:12px;
+background:#16a34a;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#15803d;
+}
+
+p{
+text-align:center;
+margin-top:15px;
+}
+
+a{
+text-decoration:none;
+color:#2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button id="registerBtn">Create Account</button>
+
+<p>
+Already have an account?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
 <script type="module">
+
 import { auth } from "./firebase.js";
+
 import {
-  createUserWithEmailAndPassword,
-  updateProfile
+createUserWithEmailAndPassword,
+updateProfile
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 const name = document.getElementById("name");
@@ -12,33 +104,38 @@ const registerBtn = document.getElementById("registerBtn");
 
 registerBtn.addEventListener("click", async () => {
 
-  const fullName = name.value.trim();
-  const userEmail = email.value.trim();
-  const userPassword = password.value;
+const fullName = name.value.trim();
+const userEmail = email.value.trim();
+const userPassword = password.value;
 
-  if (!fullName || !userEmail || !userPassword) {
-    alert("Please fill all fields");
-    return;
-  }
+if (!fullName || !userEmail || !userPassword){
+alert("Please fill all fields");
+return;
+}
 
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      userEmail,
-      userPassword
-    );
+try{
 
-    await updateProfile(userCredential.user, {
-      displayName: fullName
-    });
+const userCredential = await createUserWithEmailAndPassword(
+auth,
+userEmail,
+userPassword
+);
 
-    alert("Account Created Successfully!");
+await updateProfile(userCredential.user,{
+displayName:fullName
+});
 
-    window.location.href = "login.html";
+alert("Account Created Successfully!");
 
-  } catch (error) {
-    alert(error.message);
-  }
+window.location.href="login.html";
+
+}catch(error){
+alert(error.message);
+}
 
 });
+
 </script>
+
+</body>
+</html>
