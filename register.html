@@ -90,12 +90,18 @@ Already have an account?
 
 <script type="module">
 
-import { auth } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 
 import {
 createUserWithEmailAndPassword,
 updateProfile
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+doc,
+setDoc,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 const name = document.getElementById("name");
 const email = document.getElementById("email");
@@ -123,6 +129,14 @@ userPassword
 
 await updateProfile(userCredential.user,{
 displayName:fullName
+});
+
+await setDoc(doc(db, "users", userCredential.user.uid), {
+uid: userCredential.user.uid,
+name: fullName,
+email: userEmail,
+balance: 0,
+createdAt: serverTimestamp()
 });
 
 alert("Account Created Successfully!");
