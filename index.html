@@ -1,29 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IMT EARN Dashboard</title>
+
+<link rel="icon" href="logo.png">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3f8;
+color:#222;
+padding-bottom:90px;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+.top-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 20px;
+background:linear-gradient(135deg,#0d6efd,#0044aa);
+color:#fff;
+box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
+
+.header-logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+width:45px;
+height:45px;
+border-radius:50%;
+background:#fff;
+padding:3px;
+object-fit:cover;
+}
+
+.menu-btn{
+font-size:28px;
+cursor:pointer;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+padding:15px;
+}
+
+.profile-card{
+display:flex;
+align-items:center;
+background:linear-gradient(135deg,#0d6efd,#3b82f6);
+padding:20px;
+border-radius:18px;
+color:#fff;
+box-shadow:0 5px 15px rgba(0,0,0,.18);
+margin-bottom:18px;
+}
+
+.avatar{
+width:70px;
+height:70px;
+border-radius:50%;
+border:3px solid #fff;
+object-fit:cover;
+}
+
+.profile-right{
+margin-left:15px;
+flex:1;
+}
+
+.profile-right h2{
+font-size:22px;
+margin-bottom:5px;
+}
+
+.profile-right p{
+font-size:14px;
+opacity:.9;
+}
+
+.active-tag{
+display:inline-block;
+padding:5px 12px;
+background:#16a34a;
+border-radius:30px;
+font-size:13px;
+margin-bottom:10px;
+}
+
+.package-box{
+display:inline-block;
+margin-top:10px;
+padding:8px 15px;
+background:#fff;
+color:#0d6efd;
+border-radius:30px;
+font-weight:bold;
+}
+
+.balance-card{
+background:#fff;
+padding:20px;
+text-align:center;
+border-radius:15px;
+margin-bottom:18px;
+box-shadow:0 3px 10px rgba(0,0,0,.12);
+}
+
+.balance-card h4{
+color:#777;
+margin-bottom:8px;
+}
+
+.balance-card h1{
+font-size:35px;
+color:#16a34a;
+}
+
+.summary{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-bottom:20px;
+}
+
+.summary-box{
+background:#fff;
+padding:15px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+.summary-box h4{
+font-size:14px;
+margin-bottom:8px;
+color:#666;
+}
+
+.summary-box p{
+font-size:18px;
+font-weight:bold;
+color:#0d6efd;
+}
+    </style>
+</head>
+
+<body>
+
 <header class="top-header">
 
-    <div class="header-logo">
+<div class="header-logo">
+<img src="logo.png" class="logo">
+<h2>IMT EARN</h2>
+</div>
 
-        <img src="logo.png" class="logo">
-
-        <h2>IMT EARN</h2>
-
-    </div>
-
-    <div class="menu-btn">
-        ☰
-    </div>
+<div class="menu-btn">☰</div>
 
 </header>
 
 <div class="container">
 
-<!-- Profile Card -->
+<!-- Profile -->
 
 <div class="profile-card">
 
 <div class="profile-left">
-
 <img src="logo.png" class="avatar">
-
 </div>
 
 <div class="profile-right">
@@ -32,44 +197,28 @@
 🟢 Active Member
 </div>
 
-<h2 id="userName">
-Loading...
-</h2>
+<h2 id="userName">Loading...</h2>
 
 <p id="userEmail"></p>
 
 <div class="package-box">
-
-💼 Package
-
-<b id="userPackage">
-Starter
-</b>
-
+💼 Package :
+<b id="userPackage">Starter</b>
 </div>
 
 </div>
 
 </div>
 
-<!-- Balance Card -->
+<!-- Balance -->
 
 <div class="balance-card">
 
-<h4>
-AVAILABLE BALANCE
-</h4>
+<h4>AVAILABLE BALANCE</h4>
 
 <h1>
-
 Rs
-
-<span id="userBalance">
-
-0.00
-
-</span>
-
+<span id="userBalance">0.00</span>
 </h1>
 
 </div>
@@ -79,114 +228,70 @@ Rs
 <div class="summary">
 
 <div class="summary-box">
-
-<h4>
-
-Total Withdraw
-
-</h4>
-
-<p>
-
-Rs 0
-
-</p>
-
+<h4>Total Withdraw</h4>
+<p id="totalWithdraw">Rs 0</p>
 </div>
 
 <div class="summary-box">
-
-<h4>
-
-Team Earn
-
-</h4>
-
-<p>
-
-Rs 0
-
-</p>
-
+<h4>Team Earn</h4>
+<p id="teamEarn">Rs 0</p>
 </div>
 
 <div class="summary-box">
-
-<h4>
-
-Available
-
-</h4>
-
-<p id="balanceText">
-
-Rs 0
-
-</p>
-
+<h4>Available</h4>
+<p id="balanceText">Rs 0</p>
 </div>
 
 </div>
-<!-- Gift Code -->
+
+<!-- Gift -->
 
 <div class="card">
 
-    <h3>🎁 Gift Code</h3>
+<h2>🎁 Gift Code</h2>
 
-    <div class="gift-box">
+<div class="gift-box">
 
-        <input
-            type="text"
-            id="giftCode"
-            placeholder="Enter Gift Code">
+<input
+type="text"
+id="giftCode"
+placeholder="Enter Gift Code">
 
-        <button id="giftBtn">
-            Redeem
-        </button>
-
-    </div>
+<button id="giftBtn">
+Redeem
+</button>
 
 </div>
 
-<!-- Quick Menu -->
+</div>
+
+<!-- Menu -->
 
 <div class="menu-grid">
 
-    <button id="depositBtn">
-        💰
-        <br>
-        Deposit
-    </button>
+<button id="depositBtn">
+💰<br>Deposit
+</button>
 
-    <button id="withdrawBtn">
-        💸
-        <br>
-        Withdraw
-    </button>
+<button id="withdrawBtn">
+💸<br>Withdraw
+</button>
 
-    <button id="teamBtn">
-        👥
-        <br>
-        Team
-    </button>
+<button id="teamBtn">
+👥<br>Team
+</button>
 
-    <button id="refBtn">
-        🔗
-        <br>
-        Referral
-    </button>
+<button id="refBtn">
+🔗<br>Referral
+</button>
 
-    <button id="leaderBtn">
-        🏆
-        <br>
-        Leader
-    </button>
+<button id="leaderBtn">
+🏆<br>Leader
+</button>
 
-    <button id="levelBtn">
-        ⭐
-        <br>
-        Level
-    </button>
+<button id="levelBtn">
+⭐<br>Level
+</button>
 
 </div>
 
@@ -194,80 +299,45 @@ Rs 0
 
 <div class="card">
 
-<h2>
-Investment Packages
-</h2>
+<h2>Investment Packages</h2>
 
 <table>
 
 <tr>
-
 <th>Package</th>
-
 <th>Price</th>
-
 <th>Daily</th>
-
 </tr>
 
 <tr>
-
 <td>Starter</td>
-
 <td>Rs 500</td>
-
 <td>Rs 60</td>
-
 </tr>
 
 <tr>
-
 <td>Silver</td>
-
 <td>Rs 1000</td>
-
 <td>Rs 130</td>
-
 </tr>
 
 <tr>
-
 <td>Gold</td>
-
 <td>Rs 2000</td>
-
 <td>Rs 280</td>
-
 </tr>
 
 <tr>
-
 <td>Diamond</td>
-
 <td>Rs 5000</td>
-
 <td>Rs 750</td>
-
 </tr>
 
 </table>
 
 </div>
 
-<button class="logout" id="logoutBtn">
-
-Logout
-
-</button>
-
-</div>
-
-<footer>
-
-© 2026 IMT EARN
-
-</footer> 
-<!-- Referral Section -->
+<!-- Referral -->
 
 <div class="card">
 
@@ -276,220 +346,232 @@ Logout
 <input
 type="text"
 id="referralLink"
-readonly
-value="https://imt-earn.com/?ref=USERID">
+readonly>
 
 <button id="copyRefBtn">
-
 📋 Copy Referral Link
-
 </button>
 
 </div>
 
-<!-- Team Summary -->
+<!-- Team -->
 
-<div class="stats">
+<div class="summary">
 
-<div class="stat-box">
-
+<div class="summary-box">
 <h4>Total Team</h4>
-
-<p id="totalTeam">
-
-0
-
-</p>
-
+<p id="totalTeam">0</p>
 </div>
 
-<div class="stat-box">
-
+<div class="summary-box">
 <h4>Active Team</h4>
-
-<p id="activeTeam">
-
-0
-
-</p>
-
+<p id="activeTeam">0</p>
 </div>
 
-<div class="stat-box">
-
+<div class="summary-box">
 <h4>Total Deposit</h4>
-
-<p>
-
-Rs 0
-
-</p>
-
-</div>
-
-<div class="stat-box">
-
-<h4>Total Withdraw</h4>
-
-<p>
-
-Rs 0
-
-</p>
-
+<p id="totalDeposit">Rs 0</p>
 </div>
 
 </div>
 
-<!-- Bottom Navigation -->
-
-<div class="bottom-nav">
-
-<button id="homeBtn">
-
-🏠
-
-<br>
-
-Home
-
+<button class="logout" id="logoutBtn">
+Logout
 </button>
 
-<button id="taskBtn">
+</div>
 
-📋
+<footer>
+© 2026 IMT EARN
+</footer>
+<script type="module">
 
-<br>
+import { auth, db } from "./firebase.js";
 
-Task
+import {
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-</button>
+import {
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-<button id="walletBtn">
+const userName = document.getElementById("userName");
+const userEmail = document.getElementById("userEmail");
+const userBalance = document.getElementById("userBalance");
+const balanceText = document.getElementById("balanceText");
+const userPackage = document.getElementById("userPackage");
+const referralLink = document.getElementById("referralLink");
 
-💰
+onAuthStateChanged(auth, async (user) => {
 
-<br>
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
-Wallet
+  userName.textContent = user.displayName || "Member";
+  userEmail.textContent = user.email;
 
-</button>
+  const userRef = doc(db, "users", user.uid);
+  const snap = await getDoc(userRef);
 
-<button id="teamNavBtn">
+  if (!snap.exists()) {
 
-👥
+    await setDoc(userRef,{
+      name:user.displayName || "",
+      email:user.email,
+      balance:0,
+      package:"Starter",
+      createdAt:serverTimestamp()
+    });
 
-<br>
+  }
 
-Team
+  const data = (await getDoc(userRef)).data();
 
-</button>
+  userBalance.textContent = data.balance || 0;
+  balanceText.textContent = "Rs " + (data.balance || 0);
+  userPackage.textContent = data.package || "Starter";
 
-<button id="profileBtn">
+  referralLink.value =
+    window.location.origin +
+    window.location.pathname.replace("index.html","") +
+    "?ref=" + user.uid;
 
-👤
+});
 
-<br>
+/* Deposit */
 
-Profile
+document.getElementById("depositBtn").onclick = () => {
+  window.location.href = "deposit.html";
+};
 
-</button>
+/* Withdraw */
 
-</div> 
-.bottom-nav{
+document.getElementById("withdrawBtn").onclick = () => {
+  window.location.href = "withdraw.html";
+};
 
-position:fixed;
+/* Copy Referral */
 
-bottom:0;
+document.getElementById("copyRefBtn").onclick = () => {
 
-left:0;
+  navigator.clipboard.writeText(referralLink.value);
 
-width:100%;
+  alert("Referral Link Copied");
 
-background:#ffffff;
+};
 
-display:flex;
+/* Logout */
 
-justify-content:space-around;
+document.getElementById("logoutBtn").onclick = async () => {
 
-padding:10px 0;
+  await signOut(auth);
 
-box-shadow:0 -2px 10px rgba(0,0,0,.15);
+  window.location.href = "login.html";
 
-z-index:999;
+};
+/* ===========================
+   TEAM PAGE
+=========================== */
 
-}
+document.getElementById("teamBtn").onclick = () => {
+    window.location.href = "team.html";
+};
 
-.bottom-nav button{
+document.getElementById("teamNavBtn").onclick = () => {
+    window.location.href = "team.html";
+};
 
-background:none;
+/* ===========================
+   HOME
+=========================== */
 
-border:none;
+document.getElementById("homeBtn").onclick = () => {
+    window.location.href = "index.html";
+};
 
-font-size:14px;
+/* ===========================
+   WALLET
+=========================== */
 
-font-weight:bold;
+document.getElementById("walletBtn").onclick = () => {
+    window.location.href = "deposit.html";
+};
 
-color:#0d6efd;
+/* ===========================
+   PROFILE
+=========================== */
 
-cursor:pointer;
+document.getElementById("profileBtn").onclick = () => {
+    alert("Profile page will be added soon.");
+};
 
-}
+/* ===========================
+   TASK
+=========================== */
 
-.bottom-nav button:hover{
+document.getElementById("taskBtn").onclick = () => {
+    alert("Task page coming soon.");
+};
 
-color:#16a34a;
+/* ===========================
+   LEADER BOARD
+=========================== */
 
-}
+document.getElementById("leaderBtn").onclick = () => {
+    alert("Leaderboard coming soon.");
+};
 
-.gift-box{
+/* ===========================
+   LEVEL
+=========================== */
 
-display:flex;
+document.getElementById("levelBtn").onclick = () => {
+    alert("Level page coming soon.");
+};
 
-gap:10px;
+/* ===========================
+   GIFT CODE
+=========================== */
 
-margin-top:10px;
+document.getElementById("giftBtn").onclick = () => {
 
-}
+    const code = document.getElementById("giftCode").value.trim();
 
-.gift-box input{
+    if(code === ""){
+        alert("Please enter Gift Code");
+        return;
+    }
 
-flex:1;
+    alert("Gift Code submitted successfully.");
+};
 
-padding:10px;
+/* ===========================
+   ADMIN PANEL
+=========================== */
 
-border:1px solid #ddd;
+const ADMIN_EMAIL = "youradmin@gmail.com"; // یہاں اپنی Admin Email لکھیں
 
-border-radius:10px;
+if(auth.currentUser && auth.currentUser.email === ADMIN_EMAIL){
 
-}
+    console.log("Admin Login");
 
-.gift-box button{
+}else{
 
-padding:10px 15px;
+    const adminBtn = document.getElementById("adminBtn");
 
-border:none;
+    if(adminBtn){
+        adminBtn.style.display="none";
+    }
 
-border-radius:10px;
+    }
+</script>
 
-background:#16a34a;
-
-color:#fff;
-
-cursor:pointer;
-
-}
-
-#referralLink{
-
-width:100%;
-
-padding:12px;
-
-margin:10px 0;
-
-border:1px solid #ddd;
-
-border-radius:10px;
-
-}
+</body>
+</html>
