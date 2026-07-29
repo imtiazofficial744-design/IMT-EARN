@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Team - IMT EARN</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+    <h2>IMT EARN</h2>
+    <p>My Team</p>
+</header>
+
+
+<section class="team-box">
+
+    <h3>Team Overview</h3>
+
+    <div class="stats">
+
+        <div class="card">
+            <h2>25</h2>
+            <p>Total Team</p>
+        </div>
+
+        <div class="card">
+            <h2>10</h2>
+            <p>Direct Team</p>
+        </div>
+
+        <div class="card">
+            <h2>Rs 950</h2>
+            <p>Team Income</p>
+        </div>
+
+    </div>
+
+
+    <div class="referral">
+
+        <h3>Your Referral Link</h3>
+
+        <input type="text" value="https://imtearn.com/register?ref=IMT001" id="link" readonly>
+
+        <button onclick="copyLink()">Copy Link</button>
+
+    </div>
+
+
+    <h3 class="title">Team Members</h3>
+
+
+    <div class="members">
+
+        <div class="member">
+            <h4>User 01</h4>
+            <p>Status: Active</p>
+        </div>
+
+
+        <div class="member">
+            <h4>User 02</h4>
+            <p>Status: Active</p>
+        </div>
+
+
+        <div class="member">
+            <h4>User 03</h4>
+            <p>Status: Pending</p>
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<script>
+
+function copyLink(){
+
+let copyText=document.getElementById("link");
+
+copyText.select();
+
+navigator.clipboard.writeText(copyText.value);
+
+alert("Referral Link Copied!");
+
+}
+
+</script>
+
+
+</body>
+</html>
