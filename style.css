@@ -274,3 +274,96 @@ header p{
     color:#ffd700;
 
 }
+/* Profile Page */
+
+.profile-box{
+
+padding:20px;
+max-width:600px;
+margin:auto;
+
+}
+
+
+.profile-card{
+
+background:#0d172b;
+padding:25px;
+text-align:center;
+border-radius:20px;
+border:1px solid #d4af37;
+
+}
+
+
+.profile-img{
+
+font-size:60px;
+margin-bottom:10px;
+
+}
+
+
+.profile-card span{
+
+color:#00ff99;
+font-weight:bold;
+
+}
+
+
+
+.info-card{
+
+margin-top:20px;
+background:#0d172b;
+padding:20px;
+border-radius:15px;
+border:1px solid #333;
+
+}
+
+
+.info-card h3{
+
+color:#ffd700;
+text-align:center;
+
+}
+
+
+.info-card p{
+
+padding:10px;
+border-bottom:1px solid #222;
+
+}
+
+
+
+.buttons{
+
+margin-top:20px;
+
+}
+
+
+.buttons button{
+
+width:100%;
+padding:14px;
+margin:8px 0;
+border:none;
+border-radius:10px;
+background:#d4af37;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+
+.buttons button:hover{
+
+background:#ffd700;
+
+    }
