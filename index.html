@@ -1,577 +1,160 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IMT EARN Dashboard</title>
-
-<link rel="icon" href="logo.png">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#eef3f8;
-color:#222;
-padding-bottom:90px;
-}
-
-a{
-text-decoration:none;
-color:inherit;
-}
-
-.top-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:18px 20px;
-background:linear-gradient(135deg,#0d6efd,#0044aa);
-color:#fff;
-box-shadow:0 4px 12px rgba(0,0,0,.2);
-}
-
-.header-logo{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-.logo{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#fff;
-padding:3px;
-object-fit:cover;
-}
-
-.menu-btn{
-font-size:28px;
-cursor:pointer;
-}
-
-.container{
-max-width:600px;
-margin:auto;
-padding:15px;
-}
-
-.profile-card{
-display:flex;
-align-items:center;
-background:linear-gradient(135deg,#0d6efd,#3b82f6);
-padding:20px;
-border-radius:18px;
-color:#fff;
-box-shadow:0 5px 15px rgba(0,0,0,.18);
-margin-bottom:18px;
-}
-
-.avatar{
-width:70px;
-height:70px;
-border-radius:50%;
-border:3px solid #fff;
-object-fit:cover;
-}
-
-.profile-right{
-margin-left:15px;
-flex:1;
-}
-
-.profile-right h2{
-font-size:22px;
-margin-bottom:5px;
-}
-
-.profile-right p{
-font-size:14px;
-opacity:.9;
-}
-
-.active-tag{
-display:inline-block;
-padding:5px 12px;
-background:#16a34a;
-border-radius:30px;
-font-size:13px;
-margin-bottom:10px;
-}
-
-.package-box{
-display:inline-block;
-margin-top:10px;
-padding:8px 15px;
-background:#fff;
-color:#0d6efd;
-border-radius:30px;
-font-weight:bold;
-}
-
-.balance-card{
-background:#fff;
-padding:20px;
-text-align:center;
-border-radius:15px;
-margin-bottom:18px;
-box-shadow:0 3px 10px rgba(0,0,0,.12);
-}
-
-.balance-card h4{
-color:#777;
-margin-bottom:8px;
-}
-
-.balance-card h1{
-font-size:35px;
-color:#16a34a;
-}
-
-.summary{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-bottom:20px;
-}
-
-.summary-box{
-background:#fff;
-padding:15px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 2px 8px rgba(0,0,0,.12);
-}
-
-.summary-box h4{
-font-size:14px;
-margin-bottom:8px;
-color:#666;
-}
-
-.summary-box p{
-font-size:18px;
-font-weight:bold;
-color:#0d6efd;
-}
-    </style>
-</head>
-
-<body>
-
-<header class="top-header">
-
-<div class="header-logo">
-<img src="logo.png" class="logo">
-<h2>IMT EARN</h2>
-</div>
-
-<div class="menu-btn">☰</div>
-
-</header>
-
-<div class="container">
-
-<!-- Profile -->
-
-<div class="profile-card">
-
-<div class="profile-left">
-<img src="logo.png" class="avatar">
-</div>
-
-<div class="profile-right">
-
-<div class="active-tag">
-🟢 Active Member
-</div>
-
-<h2 id="userName">Loading...</h2>
-
-<p id="userEmail"></p>
-
-<div class="package-box">
-💼 Package :
-<b id="userPackage">Starter</b>
-</div>
-
-</div>
-
-</div>
-
-<!-- Balance -->
-
-<div class="balance-card">
-
-<h4>AVAILABLE BALANCE</h4>
-
-<h1>
-Rs
-<span id="userBalance">0.00</span>
-</h1>
-
-</div>
-
-<!-- Summary -->
-
-<div class="summary">
-
-<div class="summary-box">
-<h4>Total Withdraw</h4>
-<p id="totalWithdraw">Rs 0</p>
-</div>
-
-<div class="summary-box">
-<h4>Team Earn</h4>
-<p id="teamEarn">Rs 0</p>
-</div>
-
-<div class="summary-box">
-<h4>Available</h4>
-<p id="balanceText">Rs 0</p>
-</div>
-
-</div>
-
-<!-- Gift -->
+<!-- Investment Packages -->
 
 <div class="card">
 
-<h2>🎁 Gift Code</h2>
-
-<div class="gift-box">
-
-<input
-type="text"
-id="giftCode"
-placeholder="Enter Gift Code">
-
-<button id="giftBtn">
-Redeem
-</button>
-
-</div>
-
-</div>
-
-<!-- Menu -->
-
-<div class="menu-grid">
-
-<button id="depositBtn">
-💰<br>Deposit
-</button>
-
-<button id="withdrawBtn">
-💸<br>Withdraw
-</button>
-
-<button id="teamBtn">
-👥<br>Team
-</button>
-
-<button id="refBtn">
-🔗<br>Referral
-</button>
-
-<button id="leaderBtn">
-🏆<br>Leader
-</button>
-
-<button id="levelBtn">
-⭐<br>Level
-</button>
-
-</div>
-
-<!-- Packages -->
-
-<div class="card">
-
-<h2>Investment Packages</h2>
+<h2>💰 Investment Packages</h2>
 
 <table>
 
 <tr>
+<th>Level</th>
 <th>Package</th>
 <th>Price</th>
-<th>Daily</th>
 </tr>
 
+
 <tr>
+<td>🥈 1</td>
 <td>Starter</td>
-<td>Rs 500</td>
-<td>Rs 60</td>
-</tr>
-
-<tr>
-<td>Silver</td>
-<td>Rs 1000</td>
-<td>Rs 130</td>
-</tr>
-
-<tr>
-<td>Gold</td>
-<td>Rs 2000</td>
-<td>Rs 280</td>
-</tr>
-
-<tr>
-<td>Diamond</td>
-<td>Rs 5000</td>
 <td>Rs 750</td>
 </tr>
+
+
+<tr>
+<td>🎖️ 2</td>
+<td>Silver</td>
+<td>Rs 1200</td>
+</tr>
+
+
+<tr>
+<td>🥇 3</td>
+<td>Gold</td>
+<td>Rs 1800</td>
+</tr>
+
+
+<tr>
+<td>🥉 4</td>
+<td>Premium</td>
+<td>Rs 3000</td>
+</tr>
+
+
+<tr>
+<td>💎 5</td>
+<td>Diamond</td>
+<td>Rs 6000</td>
+</tr>
+
+
+<tr>
+<td>🎖️ 6</td>
+<td>VIP</td>
+<td>Rs 9500</td>
+</tr>
+
+
+<tr>
+<td>🎖️ 7</td>
+<td>Pro</td>
+<td>Rs 15000</td>
+</tr>
+
+
+<tr>
+<td>👑 8</td>
+<td>Ultimate</td>
+<td>Rs 22000</td>
+</tr>
+
 
 </table>
 
 </div>
+</style>
+/* =========================
+   Investment Packages Style
+========================= */
 
-<!-- Referral -->
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:18px;
+    margin-bottom:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
 
-<div class="card">
 
-<h2>👥 Invite & Earn</h2>
+.card h2{
+    text-align:center;
+    color:#0d6efd;
+    margin-bottom:18px;
+}
 
-<input
-type="text"
-id="referralLink"
-readonly>
 
-<button id="copyRefBtn">
-📋 Copy Referral Link
-</button>
 
-</div>
+table{
 
-<!-- Team -->
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:12px;
 
-<div class="summary">
+}
 
-<div class="summary-box">
-<h4>Total Team</h4>
-<p id="totalTeam">0</p>
-</div>
 
-<div class="summary-box">
-<h4>Active Team</h4>
-<p id="activeTeam">0</p>
-</div>
+table th{
 
-<div class="summary-box">
-<h4>Total Deposit</h4>
-<p id="totalDeposit">Rs 0</p>
-</div>
+    background:linear-gradient(135deg,#0d6efd,#0044aa);
+    color:#fff;
+    padding:12px;
+    font-size:14px;
 
-</div>
+}
 
-<button class="logout" id="logoutBtn">
-Logout
-</button>
 
-</div>
+table td{
 
-<footer>
-© 2026 IMT EARN
-</footer>
-<script type="module">
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+    font-weight:600;
 
-import { auth, db } from "./firebase.js";
+}
 
-import {
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-import {
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+table tr:hover{
 
-const userName = document.getElementById("userName");
-const userEmail = document.getElementById("userEmail");
-const userBalance = document.getElementById("userBalance");
-const balanceText = document.getElementById("balanceText");
-const userPackage = document.getElementById("userPackage");
-const referralLink = document.getElementById("referralLink");
+    background:#eef5ff;
 
-onAuthStateChanged(auth, async (user) => {
+}
 
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
 
-  userName.textContent = user.displayName || "Member";
-  userEmail.textContent = user.email;
+table td:nth-child(1){
 
-  const userRef = doc(db, "users", user.uid);
-  const snap = await getDoc(userRef);
+    color:#f59e0b;
 
-  if (!snap.exists()) {
+}
 
-    await setDoc(userRef,{
-      name:user.displayName || "",
-      email:user.email,
-      balance:0,
-      package:"Starter",
-      createdAt:serverTimestamp()
-    });
 
-  }
+table td:nth-child(3){
 
-  const data = (await getDoc(userRef)).data();
+    color:#16a34a;
 
-  userBalance.textContent = data.balance || 0;
-  balanceText.textContent = "Rs " + (data.balance || 0);
-  userPackage.textContent = data.package || "Starter";
+}
 
-  referralLink.value =
-    window.location.origin +
-    window.location.pathname.replace("index.html","") +
-    "?ref=" + user.uid;
 
-});
+/* Mobile */
 
-/* Deposit */
+@media(max-width:600px){
 
-document.getElementById("depositBtn").onclick = () => {
-  window.location.href = "deposit.html";
-};
+table th,
+table td{
 
-/* Withdraw */
+    font-size:12px;
+    padding:10px;
 
-document.getElementById("withdrawBtn").onclick = () => {
-  window.location.href = "withdraw.html";
-};
+}
 
-/* Copy Referral */
-
-document.getElementById("copyRefBtn").onclick = () => {
-
-  navigator.clipboard.writeText(referralLink.value);
-
-  alert("Referral Link Copied");
-
-};
-
-/* Logout */
-
-document.getElementById("logoutBtn").onclick = async () => {
-
-  await signOut(auth);
-
-  window.location.href = "login.html";
-
-};
-/* ===========================
-   TEAM PAGE
-=========================== */
-
-document.getElementById("teamBtn").onclick = () => {
-    window.location.href = "team.html";
-};
-
-document.getElementById("teamNavBtn").onclick = () => {
-    window.location.href = "team.html";
-};
-
-/* ===========================
-   HOME
-=========================== */
-
-document.getElementById("homeBtn").onclick = () => {
-    window.location.href = "index.html";
-};
-
-/* ===========================
-   WALLET
-=========================== */
-
-document.getElementById("walletBtn").onclick = () => {
-    window.location.href = "deposit.html";
-};
-
-/* ===========================
-   PROFILE
-=========================== */
-
-document.getElementById("profileBtn").onclick = () => {
-    alert("Profile page will be added soon.");
-};
-
-/* ===========================
-   TASK
-=========================== */
-
-document.getElementById("taskBtn").onclick = () => {
-    alert("Task page coming soon.");
-};
-
-/* ===========================
-   LEADER BOARD
-=========================== */
-
-document.getElementById("leaderBtn").onclick = () => {
-    alert("Leaderboard coming soon.");
-};
-
-/* ===========================
-   LEVEL
-=========================== */
-
-document.getElementById("levelBtn").onclick = () => {
-    alert("Level page coming soon.");
-};
-
-/* ===========================
-   GIFT CODE
-=========================== */
-
-document.getElementById("giftBtn").onclick = () => {
-
-    const code = document.getElementById("giftCode").value.trim();
-
-    if(code === ""){
-        alert("Please enter Gift Code");
-        return;
-    }
-
-    alert("Gift Code submitted successfully.");
-};
-
-/* ===========================
-   ADMIN PANEL
-=========================== */
-
-const ADMIN_EMAIL = "youradmin@gmail.com"; // یہاں اپنی Admin Email لکھیں
-
-if(auth.currentUser && auth.currentUser.email === ADMIN_EMAIL){
-
-    console.log("Admin Login");
-
-}else{
-
-    const adminBtn = document.getElementById("adminBtn");
-
-    if(adminBtn){
-        adminBtn.style.display="none";
-    }
-
-    }
-</script>
-
-</body>
-</html>
+}
